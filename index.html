@@ -183,7 +183,7 @@
                         <li>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">- 1k </label>
+                                    <input type="checkbox" value=""><1k </label>
                             </div>
                         </li>
                         <li>
@@ -222,41 +222,8 @@
                     <h1>Wallet Share Dashboard</h1>
                     <!-- Map -->
                     <div class="row placeholders">
-                        <div class="col-xs-6 col-sm-8 map">
-                            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-                            <div style='overflow:hidden;height:450px;'>
-                                <div id='gmap_canvas' style='height:450px;'></div>
-                                <div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div>
-                                <div><small><a href="https://termsofusegenerator.net">terms of use generator</a></small></div>
-                                <style>
-                                    #gmap_canvas img {
-                                        max-width: none!important;
-                                        background: none!important
-                                    }
-                                </style>
-                            </div>
-                            <script type='text/javascript'>
-                                function init_map() {
-                                    var myOptions = {
-                                        zoom: 12
-                                        , center: new google.maps.LatLng(43.653226, -79.38318429999998)
-                                        , mapTypeId: google.maps.MapTypeId.ROADMAP
-                                    };
-                                    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-                                    marker = new google.maps.Marker({
-                                        map: map
-                                        , position: new google.maps.LatLng(43.653226, -79.38318429999998)
-                                    });
-                                    infowindow = new google.maps.InfoWindow({
-                                        content: '<strong>Title</strong><br>toronto<br>'
-                                    });
-                                    google.maps.event.addListener(marker, 'click', function () {
-                                        infowindow.open(map, marker);
-                                    });
-                                    infowindow.open(map, marker);
-                                }
-                                google.maps.event.addDomListener(window, 'load', init_map);
-                            </script>
+                        <div class="col-xs-6 col-sm-8 map"style="height:450px; display:inline-block; overflow:hidden;">
+                            <iframe style="position:relative; top:-46px; border:none;" src="https://www.google.com/maps/d/u/0/embed?mid=1X7JilkDhpXUbqatyZsdMpckW9Cg" width="100%" height="480"></iframe>
                         </div>
                         <div class="col-xs-6 col-sm-4 placeholder blue-panel select-store">
                             <ul>
@@ -491,7 +458,7 @@
                     </div>
                     <div class="row placeholders blue-panel">
                         <h4>Transactions</h4>
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-6 col-sm-6">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-transactions">
                                 <tbody>
                                     <tr>
@@ -517,7 +484,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-xs-12 col-sm-6 placeholder">
+                        <div class="col-xs-6 col-sm-6 placeholder">
                             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-transactions">
                                 <tbody>
                                     <tr>
