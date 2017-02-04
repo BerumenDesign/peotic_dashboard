@@ -1,0 +1,274 @@
+/*
+ * Base structure
+ */
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  background: #1B1F2C;
+  font-family: 'Roboto', sans-serif;
+}
+/*
+ * Global add-ons
+ */
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #EEE;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: left;
+  font-family: "Roboto Slab";
+}
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+  line-height: 2.7em;
+}
+.navbar-inverse {
+  background-color: #1C202C;
+  border-color: #080808;
+}
+.icons-topnav {
+  height: 40px;
+  width: 40px;
+  background: black;
+  border-radius: 50%;
+  border: 1px solid #333;
+  display: inline-block;
+  margin-right: 10px;
+}
+/*
+ * Sidebar
+ */
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+div.col-sm-3.col-md-2.sidebar {
+  margin-left: 6px;
+  padding: 35px;
+}
+.main-dashboard {
+  background: white;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+.select-store {
+  min-height: 450px;
+}
+.nav-sidebar .checkbox label {
+  color: white;
+  padding-left: 40px;
+}
+.nav-sidebar h4 {
+  color: white;
+  padding-left: 5px;
+}
+.blue_button a {
+  color: #1AB4E5 !important;
+  font-size: 14px;
+}
+.nav-sidebar .blue-botton a {
+  color: #1AB4E5 !important;
+  font-size: 12px;
+}
+.navbar-fixed-top .blue_button a {
+  line-height: 38px;
+}
+.navbar-fixed-top .dropdown-menu {
+  margin-left: 28px;
+  width: 226px;
+}
+.navbar-fixed-top .caret {
+  float: right;
+  margin-top: 9.5px;
+}
+.nav-sidebar {
+  margin-left: 20px;
+}
+.blue {
+  color: #21A7DE;
+}
+.yellow {
+  color: #DF9B28;
+}
+.black {
+  color: #000;
+}
+.blue-panel {
+  background: #F3F8FC;
+  list-style: none;
+  padding: 10px 20px 20px 20px;
+  text-align: left;
+}
+.white-panel {
+  border: 1px solid #F1F1F1;
+  padding: 10px;
+}
+.blue-panel .blue-botton {
+  font-size: 12px;
+}
+.blue-panel li {
+  text-decoration: none;
+  list-style: none;
+  text-align: left;
+  margin-left: -36px;
+}
+.table-tab {
+  background: #D5EBF9;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px;
+  border: 1px solid #EBEBEB;
+  border-radius: 5px 5px 0 0;
+}
+.table-transactions-left {
+  text-align: left;
+  background: white;
+  border: 1px solid #EBEBEB;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+.table-transactions-kind {
+  padding: 10px 20px;
+}
+.blue-border {
+  background: url(../images/blue-img.png) bottom no-repeat white;
+  border-bottom: 5px solid #21A7DE;
+}
+.yellow-border {
+  background: url(../images/yellow-img.png) bottom no-repeat white;
+  border-bottom: 5px solid #D69529;
+}
+.black-border {
+  background: url(../images/black-img.png) bottom no-repeat white;
+  border-bottom: 5px solid #000000;
+}
+.top-cat {
+  background: url(../images/cyan-img.png) right no-repeat white;
+  border-right: none;
+}
+.footer-bottom p {
+  color: #858585;
+  padding: 20px;
+  text-align: center;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #585B6E;
+  margin: 0 0 1.5em 0;
+  padding: 0;
+}
+.center-text {
+  text-align: center;
+  font-family: Roboto;
+  font-weight: 400;
+}
+.nav-sidebar .btn-primary.dropdown-toggle,
+.navbar .btn-primary.dropdown-toggle {
+  width: 98%;
+  background: #282E40;
+  border: 1px solid #979797;
+  text-align: left;
+}
+.navbar-fixed-top .dropdown-toggle {
+  margin-top: 10px;
+  margin-left: 30px;
+  min-width: 200px;
+}
+.nav-sidebar .btn-sm {
+  background: #1C202C;
+  color: #C1C5D1;
+  margin-top: -9px;
+  margin-right: 3px;
+  border: 1px solid #818181;
+}
+.label-txns {
+  font-size: 12px;
+  font-weight: 700;
+}
+.top-cat-demo {
+  max-height: 578px !important;
+  display: block;
+  background: red;
+}
+.force-350 {
+  min-height: 372px;
+  padding: 40px;
+}
+.force-250 {
+  min-height: 130px;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+    background-color: #1B1F2C;
+    border-right: 1px solid #1B1F2C;
+  }
+}
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px;
+  /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #FFF;
+  background-color: #428BCA;
+}
+/*
+ * Main content
+ */
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+/*
+ * Placeholder dashboard ideas
+ */
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
