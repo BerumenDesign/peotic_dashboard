@@ -1,0 +1,34 @@
+{
+  "name": "peotic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "./node_modules/.bin/webpack -d --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fayzaan@github.com/BerumenDesign/peotic_dashboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BerumenDesign/peotic_dashboard/issues"
+  },
+  "homepage": "https://github.com/BerumenDesign/peotic_dashboard#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "highcharts": "^5.0.7",
+    "install": "^0.8.5",
+    "npm": "^4.1.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "webpack": "^2.2.1"
+  }
+}
