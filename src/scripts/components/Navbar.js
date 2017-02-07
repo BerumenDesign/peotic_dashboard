@@ -13,20 +13,20 @@ class Navbar extends Component {
                             <span className="icon-bar"/>
                         </button>
                         <a className="navbar-brand">
-                            <img src="assets/logo_peotic.png" width="120" height="44" alt="" />
+                            <img src="images/logo_peotic.png" width="120" height="44" alt="" />
                         </a>
                     </div>
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav navbar-right">
                             <li>
                                 <a href="#">
-                                    <img className="icons-topnav" src="assets/Loblaws_icon.png" />
+                                    <img className="icons-topnav" src="images/Loblaws_icon.png" />
                                     Loblaws
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <img className="icons-topnav" src="assets/user_icon.png" />
+                                    <img className="icons-topnav" src="images/user_icon.png" />
                                     Abi Rogers
                                 </a>
                             </li>
