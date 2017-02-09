@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="gr__getbootstrap_com">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+    <title>Peotic</title>
+    <!-- Bootstrap core CSS -->
+    <link href="./bootstrap_files/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="./bootstrap_files/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./bootstrap_files/dashboard.css" rel="stylesheet">
+    <link href="./bootstrap_files/login.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./bootstrap_files/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700|Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- JQuery -->
+    <script src="./bootstrap_files/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script>
+    <script src="./bootstrap_files/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./bootstrap_files/ie10-viewport-bug-workaround.js"></script>
+</head>
+
+<body data-gr-c-s-loaded="true">
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+		    	<img src="http://www.peotic.com/wp-content/themes/peotic/img/logo.png"/>
+			 	</div>
+			  	<div class="panel-body">
+		    	<h2>Sign in</h2>
+			    	<form accept-charset="UTF-8" role="form">
+                    <fieldset>
+			    	  	<div class="form-group">
+							<h5><i class="fa fa-user"></i> Username</h5>
+							  <input class="form-control" type="text" id="username" />
+
+			    		</div>
+			    		<div class="form-group">
+							<h5><i class="fa fa-key"></i> Password</h5>
+								  <input class="form-control " type="password" id="password" /><br />
+			    		</div>
+			    		<div class="form-group">
+							<input type="button" class="btn btn-lg btn-block btn-warning" value="Sign in"  onclick="javascript:validate()" />
+			    		</div>
+			    		<div class="panel alert alert-error" id="passwordsNoMatchRegister" style="display:none;">
+  <span>
+	  <h5>Try to sign in again,</h5>
+    <p>The combination of username and password is not in the system.</p>
+  </span>
+</div>
+
+
+<script type="text/javascript">
+function validate()
+{
+    if(   document.getElementById("username").value == "sparta"
+       && document.getElementById("password").value == "peotic" )
+    {
+        location.href="dashboard.html";
+    }
+    else
+    {
+		$('#passwordsNoMatchRegister').show();
+    }
+}
+</script>
+			    	</fieldset>
+			      	</form>
+			    </div>
+			</div>
+		</div>
+	</div>
+<footer class="navbar-fixed-bottom footer-bottom">
+© Copyright Peotic Inc. 2017<br>
+
+ 375 Water Street, Suite 680, Vancouver, BC, V6B 5C6, Canada | <a href="mailto:info@peotic.com">info@peotic.com</a>
+</footer>
+</div>
+    <script aria-hidden="true" type="application/x-lastpass" id="hiddenlpsubmitdiv" style="display: none;"></script>
+    <script>
+$(document).ready(function(){
+  $(document).mousemove(function(e){
+     TweenLite.to($('body'), 
+        .5, 
+        { css: 
+            {
+                backgroundPosition: ""+ parseInt(event.pageX/8) + "px "+parseInt(event.pageY/'12')+"px, "+parseInt(event.pageX/'15')+"px "+parseInt(event.pageY/'15')+"px, "+parseInt(event.pageX/'30')+"px "+parseInt(event.pageY/'30')+"px"
+            }
+        });
+  });
+});	
+	</script>
+    <script>
+        try {
+            (function () {
+                for (var lastpass_iter = 0; lastpass_iter < document.forms.length; lastpass_iter++) {
+                    var lastpass_f = document.forms[lastpass_iter];
+                    if (typeof (lastpass_f.lpsubmitorig2) == "undefined") {
+                        lastpass_f.lpsubmitorig2 = lastpass_f.submit;
+                        if (typeof (lastpass_f.lpsubmitorig2) == 'object') {
+                            continue;
+                        }
+                        lastpass_f.submit = function () {
+                            var form = this;
+                            var customEvent = document.createEvent("Event");
+                            customEvent.initEvent("lpCustomEvent", true, true);
+                            var d = document.getElementById("hiddenlpsubmitdiv");
+                            if (d) {
+                                for (var i = 0; i < document.forms.length; i++) {
+                                    if (document.forms[i] == form) {
+                                        if (typeof (d.innerText) != 'undefined') {
+                                            d.innerText = i.toString();
+                                        }
+                                        else {
+                                            d.textContent = i.toString();
+                                        }
+                                    }
+                                }
+                                d.dispatchEvent(customEvent);
+                            }
+                            form.lpsubmitorig2();
+                        }
+                    }
+                }
+            })()
+        }
+        catch (e) {}
+    </script>
+</body>
+
+</html>
