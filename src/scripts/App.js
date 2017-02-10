@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import GoogleMap from './components/GoogleMap';
 import Highcharts from 'highcharts';
 import _ from 'underscore';
+import DataStore from './stores/DataStore';
 
 class App extends Component {
     render () {
@@ -35,16 +36,80 @@ class App extends Component {
 }
 
 class Dashboard extends Component {
-    render () {
-        let loyalty_series = [
+    constructor ( props ) {
+        super( props );
+        this.state = {
+            data: DataStore.get(),
+            filters: {
+                stores: []
+            }
+        };
+    }
+    getLoyaltyData () {
+        let data = {
+            loyal: 0,
+            mix: 0,
+            dynamic: 0
+        };
+
+        this.state.data.stores
+                .filter( ( store ) => { return this.state.filters.stores.indexOf( store.id ) !== -1; }, this )
+                .forEach( ( store ) => {
+                    data.loyal += store.loyalty.loyal;
+                    data.mix += store.loyalty.mix;
+                    data.dynamic += store.loyalty.dynamic;
+                } );
+
+        return [
             {
                 data: [
-                    [ 'Loyal', 29 ],
-                    [ 'Mixed', 40 ],
-                    [ 'Dynamic', 31 ]
+                    [ 'Loyal', ( data.loyal / ( this.state.data.stores.length - 1 ) ) ],
+                    [ 'Mixed', ( data.mix / ( this.state.data.stores.length - 1 ) ) ],
+                    [ 'Dynamic', ( data.dynamic / ( this.state.data.stores.length - 1 ) ) ]
                 ]
             }
         ];
+    }
+    getLoyaltyTransactions () {
+        let data = {
+            loyal: {
+                transactions: 0,
+                total: 0
+            },
+            mixed: {
+                transactions: 0,
+                total: 0
+            },
+            dynamic: {
+                transactions: 0,
+                total: 0
+            }
+        };
+
+        this.state.data.stores
+            .filter( ( store ) => { return this.state.filters.stores.indexOf( store.id ) !== -1; }, this )
+            .forEach( ( store ) => {
+                data.loyal.transactions += ( store.transactions * ( store.loyalty.loyal / 100 ) );
+                data.loyal.total = ( store.sales * ( store.loyalty.loyal / 100 ) );
+
+                data.mixed.transactions += ( store.transactions * ( store.loyalty.mix / 100 ) );
+                data.mixed.total = ( store.sales * ( store.loyalty.mix / 100 ) );
+
+                data.dynamic.transactions += ( store.transactions * ( store.loyalty.dynamic / 100 ) );
+                data.dynamic.total = ( store.sales * ( store.loyalty.dynamic / 100 ) );
+            } );
+
+        console.log( 'getLoyaltyTransactions', data );
+
+        return data;
+
+    }
+    onFilterChange ( filter, value ) {
+        let _filters = this.state.filters;
+        _filters[ filter ] = value;
+        this.setState( { filters: _filters } );
+    }
+    render () {
 
         let wallet_series = [
             {
@@ -76,20 +141,20 @@ class Dashboard extends Component {
 
         let wallet_by_competitor_categories = [ 'Sobeys', 'Metro', 'Safeway', 'Overwaitea' ];
 
-        let our_transaction_data = {
-            loyal: {
-                transactions: 160171,
-                total: 4952507
-            },
-            mixed: {
-                transactions: 249240,
-                total: 6778693
-            },
-            dynamic: {
-                transactions: 160786,
-                total: 4965322
-            }
-        };
+        // let our_transaction_data = {
+        //     loyal: {
+        //         transactions: 160171,
+        //         total: 4952507
+        //     },
+        //     mixed: {
+        //         transactions: 249240,
+        //         total: 6778693
+        //     },
+        //     dynamic: {
+        //         transactions: 160786,
+        //         total: 4965322
+        //     }
+        // };
 
         let competition_transaction_data = {
             loyal: {
@@ -178,6 +243,8 @@ class Dashboard extends Component {
 
         let customer_age_percent_categories = [ '18-24', '25-34', '35-44', '45-54', '55-64','65+' ];
 
+        if ( !this.state.data ) { return null; }
+
         return (
             <div>
                 <h1>Wallet Share Dashboard</h1>
@@ -187,13 +254,13 @@ class Dashboard extends Component {
                         <GoogleMap />
                     </div>
                     <div className="col-xs-6 col-sm-4 placeholder blue-panel">
-                        <StoreList />
+                        <StoreList stores={this.state.data.stores} onChange={this.onFilterChange.bind( this, 'stores' )} />
                     </div>
                 </div>
 
                 <div className="row placeholders">
                     <div className="col-xs-6 col-sm-3 white-panel">
-                        <DonutChart id="_loyalty_" title="Loyalty" series={loyalty_series} colors={[ '#25a7de', '#df9a27', '#212334' ]} />
+                        <DonutChart id="_loyalty_" title="Loyalty" series={this.getLoyaltyData()} colors={[ '#25a7de', '#df9a27', '#212334' ]} />
                     </div>
                     <div className="col-xs-6 col-sm-3 white-panel">
                         <DonutChart id="_wallet_share_" title="Wallet Share" series={wallet_series} colors={[ '#25a7de', '#df9a27', '#212334' ]} />
@@ -206,7 +273,7 @@ class Dashboard extends Component {
                 <div className="row placeholders blue-panel">
                     <h4>Transactions</h4>
                     <div className="col-xs-12 col-sm-6">
-                        <TransactionsTable title="YOU" data={our_transaction_data} colorMap={transaction_colorMap} />
+                        <TransactionsTable title="YOU" data={this.getLoyaltyTransactions()} colorMap={transaction_colorMap} />
                     </div>
                     <div className="col-xs-12 col-sm-6">
                         <TransactionsTable title="COMPETITOR" data={competition_transaction_data} colorMap={transaction_colorMap} />
@@ -253,6 +320,7 @@ class TransactionsTable extends Component {
         this.state = {};
     }
     render () {
+        console.log( 'TransactionsTable.render', this.props );
         return (
             <div>
                 <table style={{width: '100%', border: '0', cellspacing: '0', cellpadding: '0'}} className="table-transactions">
@@ -302,25 +370,37 @@ class StoreList extends Component {
     constructor ( props ) {
         super( props );
         this.state = {
-            stores: [{"name":"A0001 Eglinton Ave"},{"name":"A0002 York Mills Rd"},{"name":"A0003 King Street"},{"name":"A0004 St Claire Ave"},{"name":"A0005 Weston Road"},{"name":"A0006 Dupont Street"},{"name":"A0007 Leslie Street"},{"name":"A0008 Danforth Ave"},{"name":"A0009 Blood Street"},{"name":"A00010 Wright Ave"}]
+            list: []
         };
     }
+    onChange ( e ) {
+        let _list = this.state.list;
+        let index = _list.indexOf( e.target.value );
+        if ( index !== -1 ) {
+            _list.splice( index, 1 );
+        } else {
+            _list.push( e.target.value );
+        }
+        this.setState( { list: _list } );
+        this.props.onChange( _list );
+    }
     render () {
+        console.log( 'StoreList: ', this.props );
         return (
             <div className="select-store">
                 <ul>
                     {
-                        this.state.stores.map( function ( store ) {
+                        this.props.stores.map( function ( store ) {
                             return (
                                 <li>
                                     <div className="checkbox">
                                         <label>
-                                            <input type="checkbox" value="" />{store.name}
+                                            <input type="checkbox" value={store.id} onChange={this.onChange.bind( this )} />{store.name}
                                         </label>
                                     </div>
                                 </li>
                             )
-                        } )
+                        }, this )
                     }
                 </ul>
             </div>
@@ -380,41 +460,51 @@ class DonutChart extends Component {
     constructor ( props ) {
         super( props );
         this.state = {
-            config: {
-                chart: {
-                    renderTo: '_chart_' + this.props.id,
-                    type: 'pie'
-                },
-                title: {
-                    text: this.props.title //'Loyalty'
-                },
-                legend: {
-                    labelFormat: '{percentage:.1f}% {name}'
-                },
-                tooltip: {
-                    pointFormat: '<b>{point.percentage:.1f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        innerSize: '85%',
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
-                    }
-                },
-                series: this.props.series
-            }
+            config: this.setConfig( props ),
+            chart: {}
         };
     }
+    setConfig ( props ) {
+        return {
+            chart: {
+                renderTo: '_chart_' + props.id,
+                type: 'pie'
+            },
+            title: {
+                text: props.title
+            },
+            legend: {
+                labelFormat: '{percentage:.1f}% {name}'
+            },
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: '85%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: props.series
+        };
+    }
+    componentWillReceiveProps ( props ) {
+        this.chart.series[ 0 ].setData( props.series[ 0 ].data );
+    }
     componentDidMount () {
+        this.renderChart();
+    }
+    renderChart () {
         Highcharts.setOptions( {
             colors: this.props.colors
         } );
 
-        let _chart = new Highcharts.Chart( this.state.config );
+        this.chart = new Highcharts.Chart( this.state.config );
     }
     render () {
         return (
