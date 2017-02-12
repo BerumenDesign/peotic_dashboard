@@ -39,7 +39,9 @@ class DonutChart extends Component {
         };
     }
     componentWillReceiveProps ( props ) {
-        this.chart.series[ 0 ].setData( props.series[ 0 ].data );
+        if ( props.series && props.series.length ) {
+            this.chart.series[ 0 ].setData( props.series[ 0 ].data );
+        }
     }
     componentDidMount () {
         this.renderChart();

@@ -29,11 +29,12 @@ body
 #username, #password
 {
     background-color: #1B1F2C !important;
-    color: #DCE0EE;
+    color: #DCE0EE !important;
     border: none;
     border-radius: 1px;
     border-bottom: 1px solid #EC971F;
-    padding: 23px;
+    padding: 10px;
+    min-height: 40px;
 }
 
 .alert
@@ -61,12 +62,10 @@ footer
 {
     text-align: center;
     padding: 30px;
-    margin:none;
-    position: absolute;
-    bottom: 0;
+    margin: none;
     border: none;
     border-radius: 0;
     box-shadow: none;
-	color: #969696 ;
-	background-color: #1B1F2C;
+    color: #969696;
+    background-color: #1B1F2C;
 }

@@ -184,37 +184,42 @@ class Dashboard extends Component {
     }
     render () {
 
-        let wallet_series = [
+        console.log( 'Dashboard.render - showCharts ? ', this.props.showCharts );
+        let wallet_series = this.props.showCharts ? [
             {
                 data: [
                     [ 'You', 38 ],
                     [ 'Competitor', 62 ]
                 ]
             }
-        ];
+        ] : [
+                {
+                    data: [ [], [] ]
+                }
+            ];
 
         let wallet_by_competitor_series = [
             {
                 showInLegend: false,
                 name: 'Wallet Share',
-                data: [ 18, 13, 8, 6 ],
+                data: this.props.showCharts ? [ 18, 13, 8, 6 ] : [],
                 type: 'column'
             },
             {
                 name: 'Wallet Share By Competitor',
-                data: [
+                data: this.props.showCharts ? [
                     { x: 0, y: 18 },
                     { x: 1, y: 13 },
                     { x: 2, y: 8 },
                     { x: 3, y: 6 }
-                ],
+                ] : [],
                 type: 'line'
             }
         ];
 
         let wallet_by_competitor_categories = [ 'Sobeys', 'Metro', 'Safeway', 'Overwaitea' ];
 
-        let competition_transaction_data = {
+        let competition_transaction_data = this.props.showCharts ? {
             loyal: {
                 transactions: 235723,
                 total: 7928962
@@ -227,7 +232,7 @@ class Dashboard extends Component {
                 transactions: 236183,
                 total: 7943020
             }
-        };
+        } : { loyal: { transactions: 0, total: 0 }, mixed: { transactions: 0, total: 0 }, dynamic: { transactions: 0, total: 0 } };
 
         let transaction_colorMap = {
             'loyal': 'blue',
@@ -239,7 +244,7 @@ class Dashboard extends Component {
 
         let competition_gender_ratio_series = [
             {
-                data: [ [ 'Female', 29 ], [ 'Male', 40 ] ]
+                data: this.props.showCharts ? [ [ 'Female', 29 ], [ 'Male', 40 ] ] : [ [], [] ]
             }
         ];
 
@@ -248,12 +253,12 @@ class Dashboard extends Component {
         let our_avg_transaction_type_series = [
             {
                 name: 'You',
-                data: [ 35 ],
+                data: this.props.showCharts ? [ 35 ] : [],
                 color: '#2da4db'
             },
             {
                 name: 'Competition',
-                data: [ 42 ],
+                data: this.props.showCharts ? [ 42 ] : [],
                 color: '#333333'
             }
         ];

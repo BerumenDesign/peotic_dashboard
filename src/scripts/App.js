@@ -17,13 +17,13 @@ import DataStore from './stores/DataStore';
 class App extends Component {
     constructor ( props ) {
         super( props );
-        this.state = { nav: 'wallet', login: false, data: DataStore.get(), competition: DataStore.getCompetition(), filters: { stores: [], customers: [], ages: [], genders: [], averageBalance: [] } };
+        this.state = { nav: 'wallet', showCharts: false, login: false, data: DataStore.get(), competition: DataStore.getCompetition(), filters: { stores: [], customers: [], ages: [], genders: [], averageBalance: [] } };
         console.log( 'App.construct.state', this.state );
     }
     onChangeFilters ( filters ) {
         console.log( 'onChangeFilters', filters );
         filters.stores = _.clone( this.state.storeFilters );
-        this.setState( { filters: filters, data: this.updateData( DataStore.get() ), competition: this.updateData( DataStore.getCompetition() ) } );
+        this.setState( { showCharts: true, filters: filters, data: this.updateData( DataStore.get() ), competition: this.updateData( DataStore.getCompetition() ) } );
     }
     onChangeFilterStores ( stores ) {
         console.log( 'onChangeFilterStores', stores );
@@ -175,7 +175,7 @@ class App extends Component {
                                 </div>
                             </div>
 
-                            <Dashboard data={this.state.data} competition={this.state.competition} filters={this.state.filters} />
+                            <Dashboard data={this.state.data} showCharts={this.state.showCharts} competition={this.state.competition} filters={this.state.filters} />
                         </div>
                     </div>
                     <div className="footer-bottom">
