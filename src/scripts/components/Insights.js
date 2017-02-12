@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
 
 import ColumnChart from './ColumnChart';
 
@@ -9,10 +8,12 @@ class Insights extends Component {
         let top_cats_series = [
             {
                 name: 'Actual',
+                color:'#29aae0',
                 data: [2.3, 1.8, 1.6, 1.1]
             },
             {
                 name: 'Expected',
+                color: '#333',
                 data: [2.8, 1.7, 2.1, 3.1]
             }
         ];
@@ -20,10 +21,12 @@ class Insights extends Component {
         let top_demo_series = [
             {
                 name: 'You',
+                color:'#29aae0',
                 data: [20, 18, 8, 6, 4]
             },
             {
                 name: 'Competitors',
+                color: '#333',
                 data: [24, 21, 16, 12, 8]
             }
         ];
@@ -31,6 +34,7 @@ class Insights extends Component {
         let consider_sale_series = [
             {
                 name: 'Correlation',
+                color:'#29aae0',
                 data: [51, 47, 32]
             }
         ];
@@ -38,10 +42,12 @@ class Insights extends Component {
         let new_prod_series = [
             {
                 name: 'You',
+                color:'#29aae0',
                 data: [8, 13, 6, 3]
             },
             {
                 name: 'Similar Store',
+                color: '#333',
                 data: [15, 27, 13, 8]
             }
         ];
@@ -55,7 +61,7 @@ class Insights extends Component {
         let top_cats_categories = [ 'Weight Control', 'Organic Food', 'Ready Meals', 'Cosmetics' ];
         return (
             <div className="container-fluid">
-                <div className="row">
+                <div >
                     <div className="col-sm-12 main main-dashboard">
                         <h1>Insights Dashboard</h1>
                         <div className="row">
