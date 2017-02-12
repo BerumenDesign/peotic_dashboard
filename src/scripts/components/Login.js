@@ -6,7 +6,6 @@ class Login extends Component {
         this.state = { error: false, username: '', password: '' }
     }
     login() {
-        console.log( 'login.click', this.state.username, this.state.password );
         if ( this.state.username == 'spartan' && this.state.password == 'peotic' ) {
             this.props.onLogin( {success: true });
         } else {
@@ -19,12 +18,12 @@ class Login extends Component {
     render () {
         return (
             <div className="container">
-                <link rel="stylesheet" href="/src/styles/login.css" />
+                <link rel="stylesheet" href="styles/login.css" />
                 <div className="row vertical-offset-100">
                     <div className="col-md-4 col-md-offset-4">
                         <div className="panel panel-default">
                             <div className="panel-heading">
-                                <img src="/src/images/logo_peotic.png" />
+                                <img src="images/logo_peotic.png" />
                             </div>
                             <div className="panel-body">
                                 <h2>Sign In</h2>

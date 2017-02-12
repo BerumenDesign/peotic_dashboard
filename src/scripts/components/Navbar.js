@@ -35,16 +35,52 @@ class Navbar extends Component {
                             </li>
                         </ul>
                         <form className="navbar-form navbar-left">
-                            <div className="dropdown">
-                                <button className="btn btn-primary dropdown-toggle" type="button">
-                                    <i className="fa fa-credit-card blue-button blue"/>
-                                    Wallet Share <span className="caret"/>
-                                </button>
-                            </div>
+                            <NavDropdown nav={this.props.nav} onChange={this.props.onChange} />
                         </form>
                     </div>
                 </div>
             </nav>
+        )
+    }
+}
+
+class NavDropdown extends Component {
+    constructor ( props ) {
+        super( props );
+        this.state = { open: false };
+        this.close = this.close.bind( this );
+    }
+    onChange ( value ) {
+        this.props.onChange( value );
+        this.setState( { open: false } );
+    }
+    componentWillUnmount () {
+        document.removeEventListener( 'click', this.close );
+    }
+    open () {
+        this.setState( { open: true } );
+        document.addEventListener( 'click', this.close );
+    }
+    close () {
+        document.removeEventListener( 'click', this.close );
+        this.setState( { open: false } );
+    }
+    render () {
+
+        let _label = {
+            'wallet': 'Wallet Share',
+            'insights': 'Insights'
+        };
+        return (
+            <div className={ 'dropdown' + ( this.state.open ? ' open' : '' ) }>
+                <button className="btn btn-primary dropdown-toggle" type="button" onClick={this.open.bind( this )}>
+                    <i className="fa fa-credit-card blue-botton blue"/> {_label[this.props.nav]} <span className="caret"/>
+                </button>
+                <ul className="dropdown-menu">
+                    <li><a href="#" className="active" onClick={this.onChange.bind( this, 'wallet')}><i className="fa fa-credit-card blue-botton blue" /> Wallet Share</a></li>
+                    <li><a href="#" onClick={this.onChange.bind( this, 'insights' )}><i className="fa fa-bar-chart-o blue-botton blue" /> Insights</a></li>
+                </ul>
+            </div>
         )
     }
 }

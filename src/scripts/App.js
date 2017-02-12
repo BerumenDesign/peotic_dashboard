@@ -6,6 +6,8 @@ import GoogleMap from './components/GoogleMap';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
+import Insights from './components/Insights';
+
 import StoreList from './components/StoreList';
 
 import _ from 'underscore';
@@ -15,7 +17,7 @@ import DataStore from './stores/DataStore';
 class App extends Component {
     constructor ( props ) {
         super( props );
-        this.state = { login: false, data: DataStore.get(), competition: DataStore.getCompetition(), filters: { stores: [], customers: [], ages: [], genders: [], averageBalance: [] } };
+        this.state = { nav: 'wallet', login: false, data: DataStore.get(), competition: DataStore.getCompetition(), filters: { stores: [], customers: [], ages: [], genders: [], averageBalance: [] } };
         console.log( 'App.construct.state', this.state );
     }
     onChangeFilters ( filters ) {
@@ -32,6 +34,10 @@ class App extends Component {
     }
     onLogin () {
         this.setState( { login: true } );
+    }
+    onNavChange ( nav ) {
+        console.log( 'onNavChange', nav );
+        this.setState( { nav: nav } );
     }
     updateData ( _data ) {
         // let _data = DataStore.get();
@@ -144,7 +150,49 @@ class App extends Component {
         return { stores: _stores };
         // this.setState( { data: { stores: _stores } } );
     }
+    renderPage () {
+        if ( this.state.nav == 'insights' ) {
+            return ( <Insights /> );
+        } else {
+            return (
+                <div className="container-fluid">
+
+                    <div className="row">
+                        <div className="col-sm-3 col-md-2 sidebar">
+                            <Sidebar filters={this.state.filters} onChange={this.onChangeFilters.bind( this )} />
+                        </div>
+
+                        <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main main-dashboard">
+
+                            <h1>Wallet Share Dashboard</h1>
+
+                            <div className="row placeholders">
+                                <div className="col-xs-6 col-sm-8 map">
+                                    <GoogleMap filters={this.state.filters} />
+                                </div>
+                                <div className="col-xs-6 col-sm-4 placeholder blue-panel" style={{height: '450px'}}>
+                                    <StoreList stores={this.state.data.stores} onChange={this.onChangeFilterStores.bind( this )} />
+                                </div>
+                            </div>
+
+                            <Dashboard data={this.state.data} competition={this.state.competition} filters={this.state.filters} />
+                        </div>
+                    </div>
+                    <div className="footer-bottom">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-xs-12">
+                                    <p>© Copyright Peotic Inc. 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
     render () {
+
         if ( !this.state.login ) {
             return (
                 <div>
@@ -157,41 +205,15 @@ class App extends Component {
                 </div>
             );
         }
+
         return (
-            <div className="container-fluid">
-                <Navbar />
-                <div className="row">
-                    <div className="col-sm-3 col-md-2 sidebar">
-                        <Sidebar filters={this.state.filters} onChange={this.onChangeFilters.bind( this )} />
-                    </div>
-
-                    <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main main-dashboard">
-
-                        <h1>Wallet Share Dashboard</h1>
-
-                        <div className="row placeholders">
-                            <div className="col-xs-6 col-sm-8 map">
-                                <GoogleMap filters={this.state.filters} />
-                            </div>
-                            <div className="col-xs-6 col-sm-4 placeholder blue-panel" style={{height: '450px'}}>
-                                <StoreList stores={this.state.data.stores} onChange={this.onChangeFilterStores.bind( this )} />
-                            </div>
-                        </div>
-
-                        <Dashboard data={this.state.data} competition={this.state.competition} filters={this.state.filters} />
-                    </div>
-                </div>
-                <div className="footer-bottom">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-xs-12">
-                                <p>© Copyright Peotic Inc. 2017</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <Navbar nav={this.state.nav} onChange={this.onNavChange.bind( this )} />
+                {this.renderPage()}
             </div>
         )
+
+
     }
 }
 

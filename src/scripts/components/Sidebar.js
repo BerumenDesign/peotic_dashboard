@@ -79,6 +79,36 @@ class Sidebar extends Component {
     onSubmit() {
         this.props.onChange( this.state.filters );
     }
+    all ( type ) {
+        let _filters = this.state.filters;
+        let all = [];
+
+        switch ( type ) {
+            case 'customers':
+                all = [ 'loyal', 'mixed', 'dynamic' ];
+                break;
+            case 'ages':
+                all = [ '18-24', '25-34', '35-44', '45-54', '55-64', '65' ];
+                break;
+            case 'genders':
+                all = [ 'male', 'female' ];
+                break;
+            case 'averageBalance':
+                all = [ '<1k', '1k-2.5k', '2.6-4k', '4.1-6k', '6.1k-10k', '10.1k+' ];
+                break;
+        }
+
+        _filters[ type ] = all;
+        this.setState( { filters: _filters } );
+    }
+    none ( type ) {
+        let _filters = this.state.filters;
+        _filters[ type ] = [];
+        this.setState( { filters: _filters } );
+    }
+    isChecked ( type, id ) {
+        return this.state.filters[ type ].indexOf( id ) !== -1;
+    }
     render () {
         return (
             <div>
@@ -100,7 +130,7 @@ class Sidebar extends Component {
                     <li>
                         <h4>Customer type
                             <span className="pull-right blue-botton">
-                                <a href="#">All</a> | <a href="#">None</a>
+                                <a href="#" onClick={this.all.bind( this, 'customers' )}>All</a> | <a href="#" onClick={this.none.bind( this, 'customers' )} >None</a>
                             </span>
                         </h4>
                     </li>
@@ -110,7 +140,7 @@ class Sidebar extends Component {
                             return (
                                 <li>
                                     <div className="checkbox">
-                                        <label><input type="checkbox" value={type} onChange={this.onChange.bind( this, 'customers' )} />{_label[ type ]}</label>
+                                        <label><input type="checkbox" checked={this.isChecked( 'customers', type )} value={type} onChange={this.onChange.bind( this, 'customers' )} />{_label[ type ]}</label>
                                     </div>
                                 </li>
                             )
@@ -122,7 +152,7 @@ class Sidebar extends Component {
                     <li>
                         <h4>Age
                             <span className="pull-right blue-botton">
-                                <a href="#">All</a> | <a href="#">None</a>
+                                <a href="#" onClick={this.all.bind( this, 'ages' )}>All</a> | <a href="#" onClick={this.none.bind( this, 'ages' )}>None</a>
                             </span>
                         </h4>
                     </li>
@@ -131,7 +161,7 @@ class Sidebar extends Component {
                             return (
                                 <li>
                                     <div className="checkbox">
-                                        <label><input type="checkbox" value={ageRange} onChange={this.onChange.bind( this, 'ages' )} />{ageRange}</label>
+                                        <label><input type="checkbox" checked={this.isChecked( 'ages', ageRange )} value={ageRange} onChange={this.onChange.bind( this, 'ages' )} />{ageRange}</label>
                                     </div>
                                 </li>
                             );
@@ -143,7 +173,7 @@ class Sidebar extends Component {
                     <li>
                         <h4>Gender
                             <span className="pull-right blue-botton">
-                                <a href="#">All</a> | <a href="#">None</a>
+                                <a href="#" onClick={this.all.bind( this, 'genders' )}>All</a> | <a href="#" onClick={this.none.bind( this, 'genders' )}>None</a>
                             </span>
                         </h4>
                     </li>
@@ -152,7 +182,7 @@ class Sidebar extends Component {
                             return (
                                 <li>
                                     <div className="checkbox">
-                                        <label><input type="checkbox" value={gender} onChange={this.onChange.bind( this, 'genders' )} /> {gender}</label>
+                                        <label><input type="checkbox" checked={this.isChecked( 'genders', gender )} value={gender} onChange={this.onChange.bind( this, 'genders' )} /> {gender}</label>
                                     </div>
                                 </li>
                             )
@@ -165,7 +195,7 @@ class Sidebar extends Component {
                     <li>
                         <h4>Avg Balance
                             <span className="pull-right blue-botton">
-                                <a href="#">All</a> | <a href="#">None</a>
+                                <a href="#" onClick={this.all.bind( this, 'averageBalance' )}>All</a> | <a href="#" onClick={this.none.bind( this, 'averageBalance' )}>None</a>
                             </span>
                         </h4>
                     </li>
@@ -174,7 +204,7 @@ class Sidebar extends Component {
                             return (
                                 <li>
                                     <div className="checkbox">
-                                        <label><input type="checkbox" value={range} onChange={this.onChange.bind( this, 'averageBalance' )} />{range}</label>
+                                        <label><input type="checkbox" checked={this.isChecked( 'averageBalance', range )} value={range} onChange={this.onChange.bind( this, 'averageBalance' )} />{range}</label>
                                     </div>
                                 </li>
                             )

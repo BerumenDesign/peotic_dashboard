@@ -11,11 +11,11 @@ class GoogleMap extends Component {
     }
     componentDidMount () {
         console.log( 'GoogleMap' );
-        google.maps.event.addDomListener( window, 'load', this.initMap );
+        // google.maps.event.addDomListener( window, 'load', this.initMap );
         this.initMap();
     }
     componentWillUnmount () {
-        google.maps.event.removeDomListener( window, 'load', this.initMap );
+        // google.maps.event.removeDomListener( window, 'load', this.initMap );
     }
     componentWillReceiveProps ( props ) {
         this.clear();
