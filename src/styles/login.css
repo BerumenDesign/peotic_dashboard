@@ -1,0 +1,72 @@
+body
+{
+    background: url("../images/bg-peotic.jpg") center center / cover no-repeat fixed rgba(110, 110, 110, 0);
+    color: white;
+}
+
+.panel
+{
+    background: rgba(27, 31, 44, 0.8);
+    color: white;
+    box-shadow: 0 3px 5px #01398a;
+    border: 1px solid #7A7A7A;
+}
+
+.panel-heading
+{
+    background: #1B1F2C !important;
+    padding: 20px;
+    border: none;
+    text-align: center;
+}
+
+.panel-body h2
+{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#username, #password
+{
+    background-color: #1B1F2C !important;
+    color: #DCE0EE;
+    border: none;
+    border-radius: 1px;
+    border-bottom: 1px solid #EC971F;
+    padding: 23px;
+}
+
+.alert
+{
+    background: #A86404;
+    box-shadow: none;
+    color: #F9E3C5;
+    padding: 20px 20px 10px 20px;
+}
+
+.vertical-offset-100
+{
+    padding-top: 10%;
+}
+
+footer
+{
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-bottom
+{
+    text-align: center;
+    padding: 30px;
+    margin:none;
+    position: absolute;
+    bottom: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+	color: #969696 ;
+	background-color: #1B1F2C;
+}
