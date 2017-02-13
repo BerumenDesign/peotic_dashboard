@@ -6,7 +6,7 @@ class Login extends Component {
         this.state = { error: false, username: '', password: '' }
     }
     login() {
-        if ( this.state.username == 'spartan' && this.state.password == 'peotic' ) {
+        if ( this.state.username == 'sparta' && this.state.password == 'peotic' ) {
             this.props.onLogin( {success: true });
         } else {
             this.setState( { error: true } );
