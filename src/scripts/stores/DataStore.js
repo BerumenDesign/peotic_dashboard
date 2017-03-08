@@ -95,7 +95,7 @@ store.get = function () {
                     mixed: 48,
                     dynamic: 30
                 },
-                postaleCode: 'M5P',
+                postalCode: 'M5P',
                 coordinates: [ -79.4462398, 43.6773002 ],
                 avgBalance: 5700,
                 ages: {
